@@ -36,6 +36,7 @@ int checkWin(char player) {
 int main() {
     char currentPlayer = 'X';
     int row, col;
+    char key;
 
     initializeBoard();
 
@@ -45,10 +46,14 @@ int main() {
         printf("\nCurrent board:\n");
         printBoard();
 
-        printf("Player %c's turn. Enter row (0-2) and column (0-2): ", currentPlayer);
-        scanf("%d %d", &row, &col);
+        printf("Player %c's turn. Press a key (1-9) to make your move: ", currentPlayer);
 
-        if (row < 0 || row > 2 || col < 0 || col > 2 || board[row][col] != ' ') {
+        scanf(" %c", &key);
+
+        row = (key - '1') / 3;
+        col = (key - '1') % 3;
+
+        if (key < '1' || key > '9' || board[row][col] != ' ') {
             printf("Invalid move! Try again.\n");
             turn--;
             continue;
